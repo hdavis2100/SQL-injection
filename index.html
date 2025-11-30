@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">    
+
+
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+</head>
+<body>
+    <h2> Login:</h2>
+    <form id="loginForm">
+        Username: <input type="text" name="username"><br>
+        Password: <input type="password" name="password"><br>
+        <input type="submit" value="Login">
+    </form>
+
+    <ul id="messages">
+
+    </ul>
+
+<script>
+
+function loginUser() {
+    const form = document.getElementById('loginForm');
+    const formData = new FormData(form);
+
+    fetch('login.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(Object.fromEntries(formData))
+
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        const messagesList = document.getElementById('messages');
+        messagesList.innerHTML = '';
+        if(data.status === 'Logged in successfully') {
+            data.messages.forEach(message => {
+                const li = document.createElement('li');
+                li.textContent = message.content;
+                messagesList.appendChild(li);
+            });
+        } else {
+            const li = document.createElement('li');
+            li.textContent = 'Login failed';
+            messagesList.appendChild(li);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+
+    
+}
+
+form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    loginUser();
+});
+
+
+</script>
+
+</body>
+
+
+</html>
