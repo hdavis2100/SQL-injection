@@ -18,8 +18,16 @@
     Password: <input type="password" id="password" name="password"><br>
     <button id="loginBtn" onclick="loginUser()">Login</button>
 
+    <h2 id="m"> Messages:</h2>
 
     <ul id="messages">
+
+    </ul>
+
+    <h2 id="f"> Find users by name and email:</h2>
+    <input type="text" id="searchKey" name="searchKey"><br>
+    <button id="searchBtn" onclick="getUsers()">Search</button>
+    <ul id="userResults">
 
     </ul>
 
@@ -62,11 +70,43 @@ function loginUser() {
             document.getElementById('username').value = '';
             document.getElementById('password').value = '';
             document.getElementById('logoutBtn').hidden = false;
+            document.getElementById('m').hidden = false;
+            document.getElementById('f').hidden = false;
+
+
         } else {
             const li = document.createElement('li');
             li.textContent = 'Login failed';
             messagesList.appendChild(li);
         }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+
+}
+
+function getUsers(){
+    const key = document.getElementById('searchKey').value;
+    data = {searchKey: key};
+    fetch('search.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        const userResultsList = document.getElementById('userResults');
+        userResultsList.innerHTML = '';
+        data.forEach(user => {
+            const li = document.createElement('li');
+            li.textContent = `${user.name} (${user.email})`;
+            userResultsList.appendChild(li);
+        });
     })
     .catch(error => {
         console.error('Error:', error);
@@ -81,6 +121,9 @@ function logout() {
     document.getElementById('loginBtn').hidden = false;
     document.getElementById('logoutBtn').hidden = true;
     document.getElementById('messages').innerHTML = '';
+    document.getElementById('m').hidden = true;
+    document.getElementById('f').hidden = true;
+    document.getElementById('userResults').innerHTML = '';
 }
 
 
