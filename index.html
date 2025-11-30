@@ -23,6 +23,8 @@
 
     </ul>
 
+    <button id="logoutBtn" hidden onclick="logout()">Logout</button>
+
 <script>
 
 function loginUser() {
@@ -51,6 +53,12 @@ function loginUser() {
                 li.textContent = message.content;
                 messagesList.appendChild(li);
             });
+            document.getElementById('username').hidden = true;
+            document.getElementById('password').hidden = true;
+            document.getElementById('loginBtn').hidden = true;
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            document.getElementById('logoutBtn').hidden = false;
         } else {
             const li = document.createElement('li');
             li.textContent = 'Login failed';
@@ -61,13 +69,19 @@ function loginUser() {
         console.error('Error:', error);
     });
 
-    
 }
 
-form.addEventListener('submit', function(event) {
-    event.preventDefault();
-    loginUser();
-});
+function logout() {
+    
+    document.getElementById('username').hidden = false;
+    document.getElementById('password').hidden = false;
+    document.getElementById('loginBtn').hidden = false;
+    document.getElementById('logoutBtn').hidden = true;
+    document.getElementById('messages').innerHTML = '';
+}
+
+
+
 
 
 </script>
