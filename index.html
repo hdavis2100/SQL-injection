@@ -46,9 +46,14 @@ function loginUser() {
         const messagesList = document.getElementById('messages');
         messagesList.innerHTML = '';
         if(data.status === 'Logged in successfully') {
-            data.messages.forEach(message => {
+            data.messages.forEach(msg => {
                 const li = document.createElement('li');
-                li.textContent = message.content;
+                const sender = msg.sender;
+                const recipient = msg.recipient;
+                const message = msg.message;
+                li.textContent = `${sender} to ${recipient}: ${message}`;
+
+
                 messagesList.appendChild(li);
             });
             document.getElementById('username').hidden = true;
