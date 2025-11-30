@@ -10,6 +10,12 @@ $password = $json_obj['password'];
 
 $query = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
 $result = $mysqli->query($query);
+error_log("DEBUG QUERY: $query");
+
+$result = $mysqli->query($query);
+if (!$result) {
+    error_log("MYSQL ERROR: " . $mysqli->error);
+}
 if($result->num_rows > 0) {
     
     $query = "SELECT * FROM messages WHERE recipient = '$username' or sender = '$username'";
