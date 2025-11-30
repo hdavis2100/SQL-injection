@@ -1,7 +1,12 @@
 <?php
 include 'database.php';
-$username = $_POST['username'];
-$password = $_POST['password'];
+header('Content-Type: application/json');
+
+$json_str = file_get_contents('php://input');
+$json_obj = json_decode($json_str, true);
+$username = $json_obj['username'];
+$password = $json_obj['password'];
+
 
 $query = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
 $result = $mysqli->query($query);
