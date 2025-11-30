@@ -7,7 +7,7 @@ $query = "SELECT * FROM users WHERE username = '$username' AND password = '$pass
 $result = $mysqli->query($query);
 if($result->num_rows > 0) {
     
-    $query = "SELECT * FROM messages WHERE recipient = '$username'";
+    $query = "SELECT * FROM messages WHERE recipient = '$username' or sender = '$username'";
     $messages_result = $mysqli->query($query);
     $messages = array();
     while($row = $messages_result->fetch_assoc()) {
