@@ -18,21 +18,20 @@
     Password: <input type="password" id="password" name="password"><br>
     <button id="loginBtn" onclick="loginUser()">Login</button>
 
-    <h2 id="m"> Messages:</h2>
+    <h2 id="m" hidden> Messages:</h2>
 
     <ul id="messages">
 
     </ul>
 
-    <h2 id="f"> Find users by name and email:</h2>
-    <input type="text" id="searchKey" name="searchKey"><br>
-    <button id="searchBtn" onclick="getUsers()">Search</button>
+    <h2 id="f" hidden> Find users by name and email:</h2>
+    <input type="text" id="searchKey" name="searchKey" hidden><br>
+    <button id="searchBtn" onclick="getUsers()" hidden>Search</button>
     <ul id="userResults">
 
     </ul>
 
     <button id="logoutBtn" hidden onclick="logout()">Logout</button>
-
 <script>
 
 function loginUser() {
