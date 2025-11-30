@@ -71,7 +71,8 @@ function loginUser() {
             document.getElementById('logoutBtn').hidden = false;
             document.getElementById('m').hidden = false;
             document.getElementById('f').hidden = false;
-
+            document.getElementById('searchKey').hidden = false;
+            document.getElementById('searchBtn').hidden = false;
 
         } else {
             const li = document.createElement('li');
@@ -122,6 +123,8 @@ function logout() {
     document.getElementById('messages').innerHTML = '';
     document.getElementById('m').hidden = true;
     document.getElementById('f').hidden = true;
+    document.getElementById('searchKey').hidden = true;
+    document.getElementById('searchBtn').hidden = true;
     document.getElementById('userResults').innerHTML = '';
 }
 
