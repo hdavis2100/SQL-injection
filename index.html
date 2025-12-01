@@ -167,7 +167,7 @@ function loginUser2() {
             document.getElementById('loginBtn2').hidden = true;
             document.getElementById('username2').hidden = true;
             document.getElementById('password2').hidden = true;
-            
+
         } else {
             const li = document.createElement('li');
             li.textContent = 'Login failed';
@@ -186,6 +186,9 @@ function logout() {
     document.getElementById('password').hidden = false;
     document.getElementById('loginBtn').hidden = false;
     document.getElementById('logoutBtn').hidden = true;
+    document.getElementById('loginBtn2').hidden = false;
+    document.getElementById('username2').hidden = false;
+    document.getElementById('password2').hidden = false;
     document.getElementById('messages').innerHTML = '';
     document.getElementById('m').hidden = true;
     document.getElementById('f').hidden = true;
